@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { celebrate, Joi, errors } = require('celebrate');
+const cors = require('cors');
 const userRouter = require('./routes/user');
 const moviesRouter = require('./routes/movie');
 const { login } = require('./controllers/login');
@@ -14,6 +15,22 @@ const { requestLogger, errorLogger } = require('./middlewares/Logger');
 
 const app = express();
 mongoose.connect('mongodb://127.0.0.1/bitfilmsdb');
+
+const options = {
+  origin: [
+    'http://localhost:3000',
+    'https://project-movies-479.nomoredomains.club',
+    'http://project-movies-479.nomoredomains.club',
+    'https://tale245.github.io',
+  ],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
+  credentials: true,
+};
+
+app.use('*', cors(options));
 
 app.use(bodyParser.json());
 
