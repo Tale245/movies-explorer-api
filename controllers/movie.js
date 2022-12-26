@@ -14,7 +14,7 @@ module.exports.getMovies = (req, res, next) => {
     });
 };
 
-module.exports.createMovie = (req, res, next) => {
+module.exports.createMovie = async (req, res, next) => {
   const owner = req.user._id;
 
   const {
@@ -31,7 +31,7 @@ module.exports.createMovie = (req, res, next) => {
     movieId,
   } = req.body;
 
-  Movie.create({
+  const movie = await Movie.create({
     country,
     director,
     duration,
@@ -44,7 +44,10 @@ module.exports.createMovie = (req, res, next) => {
     thumbnail,
     movieId,
     owner,
-  })
+  });
+
+  movie
+    .populate('owner')
     .then((data) => {
       res.status(STATUS__OK).send(data);
     })
@@ -58,7 +61,7 @@ module.exports.createMovie = (req, res, next) => {
 };
 
 module.exports.deleteMovie = (req, res, next) => {
-  Movie.findById(req.params.id)
+  Movie.findById(req.params._id)
     .populate('owner')
     .orFail(() => {
       throw new NotFoundError('Запрашиваемая карточка не найдена');

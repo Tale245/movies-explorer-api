@@ -50,6 +50,10 @@ app.post('/signup', celebrate({
   }),
 }), createUser);
 
+app.post('/signout', (req, res) => {
+  res.clearCookie('id');
+});
+
 app.use(auth);
 
 app.use('/', userRouter);

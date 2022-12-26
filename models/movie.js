@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 
 const { urlRegExp } = require('../constants/constants');
 
+const objectId = mongoose.Schema.Types.ObjectId;
+
 const movieSchema = new mongoose.Schema(
   {
     country: {
@@ -14,19 +16,19 @@ const movieSchema = new mongoose.Schema(
     },
     duration: {
       type: Number,
-      require: true,
+      required: true,
     },
     year: {
       type: String,
-      require: true,
+      required: true,
     },
     description: {
       type: String,
-      require: true,
+      required: true,
     },
     image: {
       type: String,
-      require: true,
+      required: true,
       validate: {
         validator(v) {
           return urlRegExp.test(v);
@@ -35,7 +37,7 @@ const movieSchema = new mongoose.Schema(
     },
     trailerLink: {
       type: String,
-      require: true,
+      required: true,
       validate: {
         validator(v) {
           return urlRegExp.test(v);
@@ -44,7 +46,7 @@ const movieSchema = new mongoose.Schema(
     },
     thumbnail: {
       type: String,
-      require: true,
+      required: true,
       validate: {
         validator(v) {
           return urlRegExp.test(v);
@@ -52,21 +54,21 @@ const movieSchema = new mongoose.Schema(
       },
     },
     owner: {
-      type: mongoose.Schema.Types.ObjectId,
-      require: true,
+      type: objectId,
+      required: true,
       ref: 'user',
     },
     movieId: {
-      type: mongoose.Schema.Types.ObjectId,
-      require: true,
+      type: objectId,
+      required: true,
     },
     nameRU: {
       type: String,
-      require: true,
+      required: true,
     },
     nameEN: {
       type: String,
-      require: true,
+      required: true,
     },
 
   },
