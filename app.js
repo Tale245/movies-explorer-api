@@ -13,8 +13,10 @@ const NotFoundError = require('./Error/NotFoundError');
 const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/Logger');
 
+const { NODE_ENV, DATABASE_ADDRESS } = process.env;
+
 const app = express();
-mongoose.connect('mongodb://127.0.0.1/bitfilmsdb');
+mongoose.connect(`${NODE_ENV === 'production' ? DATABASE_ADDRESS : 'mongodb://127.0.0.1/bitfilmsdb'}`);
 
 const options = {
   origin: [
@@ -67,6 +69,7 @@ app.use(errorLogger);
 
 app.use(errors());
 
+// Централизованный обработчик ошибок
 app.use((err, req, res, next) => {
   const { statusCode = INTERNAL__SERVER_ERROR, message } = err;
 
