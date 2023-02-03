@@ -22,6 +22,8 @@ const options = {
   origin: [
     'http://localhost:3000',
     'https://project-movies-479.nomoredomains.club',
+    'http://movies479-frontend.nomoredomainsclub.ru',
+    'https://movies479-frontend.nomoredomainsclub.ru',
     'http://project-movies-479.nomoredomains.club',
     'https://tale245.github.io',
   ],

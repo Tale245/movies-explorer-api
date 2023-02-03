@@ -3,7 +3,6 @@ const Movie = require('../models/movie');
 const { STATUS__OK } = require('../constants/constants');
 
 const NotFoundError = require('../Error/NotFoundError');
-const ForbiddenError = require('../Error/ForbiddenError');
 const BadRequestError = require('../Error/BadRequestError');
 
 module.exports.getMovies = (req, res, next) => {
