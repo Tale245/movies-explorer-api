@@ -16,7 +16,6 @@ module.exports.getMovies = (req, res, next) => {
 
 module.exports.createMovie = async (req, res, next) => {
   const owner = req.user._id;
-
   const {
     country,
     director,
@@ -45,7 +44,6 @@ module.exports.createMovie = async (req, res, next) => {
     movieId,
     owner,
   });
-
   movie
     .populate('owner')
     .then((data) => {
