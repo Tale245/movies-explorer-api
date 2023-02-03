@@ -65,15 +65,11 @@ module.exports.deleteMovie = (req, res, next) => {
       throw new NotFoundError('Запрашиваемая карточка не найдена');
     })
     .then((data) => {
-      if (data.owner.id !== req.user._id) {
-        throw new ForbiddenError('Отказано в доступе');
-      } else {
-        Movie.findByIdAndRemove(data.id)
-          .then(() => res.status(STATUS__OK).send(data))
-          .catch((e) => {
-            next(e);
-          });
-      }
+      Movie.findByIdAndRemove(data.id)
+        .then(() => res.status(STATUS__OK).send(data))
+        .catch((e) => {
+          next(e);
+        });
     })
     .catch((e) => {
       if (e.name === 'CastError') {
