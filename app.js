@@ -80,7 +80,7 @@ app.use((err, req, res, next) => {
   next();
 });
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3001 } = process.env;
 
 app.listen(PORT, () => {
   console.log(`Server has been started on port ${PORT}`);
